@@ -95,6 +95,57 @@ def youtube_search(query, max_results=4):
     return seen
 
 
+# ---------------------------------------------------------------- Gemini（AIキーワード提案）
+try:
+    GEMINI_API_KEY = str(st.secrets["GEMINI_API_KEY"])
+except Exception:
+    GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+
+GEMINI_MODEL = "gemini-2.5-flash"
+
+
+@st.cache_data(ttl=86400, show_spinner=False)
+def gemini_suggest_query(image_path):
+    """問題ページ画像をGeminiに渡し、YouTube検索キーワードと単元名を返す。"""
+    from google import genai
+    from google.genai import types
+
+    with open(image_path, "rb") as f:
+        image_bytes = f.read()
+
+    prompt = (
+        "あなたは中学受験の学習サポートです。"
+        "添付画像は中学入試の問題ページです。"
+        "この問題を理解するために小学生が見るとよいYouTube解説動画を"
+        "見つけるための、日本語の検索キーワードを1つ作ってください。"
+        "複数の小問がある場合は主要な単元にしぼってまとめてください。"
+        "塾や教育チャンネルの解説動画が見つかりやすい、具体的なキーワードに"
+        "してください（例:「中学受験 算数 食塩水 濃度 解説」）。"
+        "topic には単元名を短く、query には検索キーワードを入れてください。"
+    )
+
+    client = genai.Client(api_key=GEMINI_API_KEY)
+    resp = client.models.generate_content(
+        model=GEMINI_MODEL,
+        contents=[
+            types.Part.from_bytes(data=image_bytes, mime_type="image/png"),
+            prompt,
+        ],
+        config=types.GenerateContentConfig(
+            response_mime_type="application/json",
+            response_schema={
+                "type": "object",
+                "properties": {
+                    "topic": {"type": "string"},
+                    "query": {"type": "string"},
+                },
+                "required": ["topic", "query"],
+            },
+        ),
+    )
+    return json.loads(resp.text)
+
+
 # ---------------------------------------------------------------- サイドバー
 data = load_index()
 exams = data["exams"]
@@ -185,9 +236,39 @@ with left:
 with right:
     st.subheader("🎬 関連動画")
     topic_key = f"topic_{exam['id']}_{page['page']}"
+    pending_key = f"pending_{exam['id']}_{page['page']}"
+    ai_topic_key = f"aitopic_{exam['id']}_{page['page']}"
+
+    # AIボタンの結果が保留されていれば、ウィジェット生成前にキーワード欄へ反映
+    if pending_key in st.session_state:
+        st.session_state[topic_key] = st.session_state.pop(pending_key)
+    if topic_key not in st.session_state:
+        st.session_state[topic_key] = page["topic"]
+
+    # 🤖 AIにおまかせボタン
+    ai_disabled = not GEMINI_API_KEY
+    if st.button(
+        "🤖 AIにこの問題に合う動画をさがしてもらう",
+        width="stretch",
+        disabled=ai_disabled,
+        type="primary",
+    ):
+        try:
+            with st.spinner("🤖 AIが問題を読んでいます…"):
+                result = gemini_suggest_query(img_path)
+            st.session_state[pending_key] = result["query"]
+            st.session_state[ai_topic_key] = result["topic"]
+            st.rerun()
+        except Exception as e:
+            st.error(f"AIの呼び出しに失敗しました: {e}")
+
+    if ai_disabled:
+        st.caption("💡 AI機能を使うには Gemini APIキーの設定が必要です（READMEを参照）。")
+    if st.session_state.get(ai_topic_key):
+        st.caption(f"🤖 AIの判定した単元: 「{st.session_state[ai_topic_key]}」")
+
     topic = st.text_input(
         "🔍 動画の検索キーワード（書きかえると保存されます）",
-        value=page["topic"],
         key=topic_key,
     )
     if topic != page["topic"]:

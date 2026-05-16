@@ -22,6 +22,17 @@
 - **Streamlit Community Cloud**: アプリの `Settings > Secrets` に同じ内容を貼り付け。
 - シークレット未設定時の既定PINは `app.py` 内の `APP_PIN` 既定値が使われます。
 
+## AIで動画をさがす（Gemini）
+
+子どもがキーワードを思いつかなくても、AIが問題ページを読んで最適な検索ワードを作ります。
+
+- 右パネルの **「🤖 AIにこの問題に合う動画をさがしてもらう」** ボタンを押すと、Gemini が問題画像を解析し、単元を判定して検索キーワードを自動入力します。
+- 生成されたキーワードは `index.json` に保存されるので、同じページでは次回からAIを呼びません。
+- 使うには Gemini API キーが必要です（https://aistudio.google.com/apikey で無料取得、無料枠で十分）。
+  - **ローカル**: `.streamlit/secrets.toml` の `GEMINI_API_KEY` に貼り付け。
+  - **Streamlit Community Cloud**: `Settings > Secrets` に `GEMINI_API_KEY` を追加。
+- キー未設定の場合、ボタンは無効化され、手入力のキーワード検索のみ使えます。
+
 ## Streamlit Community Cloud へのデプロイ
 
 1. このリポジトリを GitHub に push 済みにする。
@@ -30,6 +41,7 @@
 4. 「Advanced settings > Secrets」に以下を貼り付け:
    ```
    APP_PIN = "1203"
+   GEMINI_API_KEY = "（Gemini APIキー）"
    ```
 5. Deploy。発行されたURLにPINを入れて利用します。
 
@@ -37,7 +49,7 @@
 
 - **サイドバー** … 科目（算数・理科・社会）と回（第1〜3回）をえらぶ。「問題ページだけ表示」で計算用紙・表紙を隠せます。
 - **左** … 問題ページの画像。「まえ／つぎ」ボタンやジャンプで移動。
-- **右** … キーワードに関連したYouTube動画。キーワード欄を書きかえると `index.json` に自動保存されます。
+- **右** … キーワードに関連したYouTube動画。「🤖 AIに〜」ボタンでキーワードを自動生成。キーワード欄を書きかえると `index.json` に自動保存されます。
 
 ## ファイル構成
 

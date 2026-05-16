@@ -1,3 +1,4 @@
 streamlit>=1.57
 pymupdf>=1.27
 requests>=2.31
+google-genai>=1.0
