@@ -37,19 +37,8 @@ st.markdown(
         overflow-y: auto;
         padding-right: 12px;
     }
-    /* AI先生チャット：右下に浮かべる（閉じているとき＝ボタンのみ） */
-    .st-key-ai_chat_closed {
-        position: fixed;
-        bottom: 1.2rem;
-        right: 1.2rem;
-        z-index: 1000;
-    }
-    .st-key-ai_chat_closed button {
-        box-shadow: 0 4px 14px rgba(0,0,0,0.3);
-        border-radius: 24px;
-    }
-    /* AI先生チャット：右下に浮かべる（開いているとき＝パネル） */
-    .st-key-ai_chat_open {
+    /* AI先生チャット：右下に常に表示する浮動パネル */
+    .st-key-ai_chat {
         position: fixed;
         bottom: 1.2rem;
         right: 1.2rem;
@@ -199,21 +188,9 @@ def gemini_chat(image_bytes, unit_labels, history):
 
 
 def render_chat(exam_id, page_no, img_path, unit_labels):
-    """右下に浮かぶ AI先生チャット。問題ページごとに会話を分ける。"""
-    # 閉じているときは、右下に開くボタンだけを出す
-    if not st.session_state.get("chat_open", False):
-        with st.container(key="ai_chat_closed"):
-            if st.button("🤖 AI先生に きく", key="chat_open_btn", type="primary"):
-                st.session_state["chat_open"] = True
-                st.rerun()
-        return
-
-    with st.container(key="ai_chat_open"):
-        head = st.columns([5, 1])
-        head[0].markdown("### 🤖 AI先生")
-        if head[1].button("✕", key="chat_close_btn"):
-            st.session_state["chat_open"] = False
-            st.rerun()
+    """右下に常に表示する AI先生チャット。問題ページごとに会話を分ける。"""
+    with st.container(key="ai_chat"):
+        st.markdown("### 🤖 AI先生")
 
         if not GEMINI_API_KEY:
             st.info("AI先生は準備中です（Gemini APIキーが未設定）。")
