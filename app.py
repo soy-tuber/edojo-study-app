@@ -37,6 +37,33 @@ st.markdown(
         overflow-y: auto;
         padding-right: 12px;
     }
+    /* AI先生チャット：右下に浮かべる（閉じているとき＝ボタンのみ） */
+    .st-key-ai_chat_closed {
+        position: fixed;
+        bottom: 1.2rem;
+        right: 1.2rem;
+        z-index: 1000;
+    }
+    .st-key-ai_chat_closed button {
+        box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+        border-radius: 24px;
+    }
+    /* AI先生チャット：右下に浮かべる（開いているとき＝パネル） */
+    .st-key-ai_chat_open {
+        position: fixed;
+        bottom: 1.2rem;
+        right: 1.2rem;
+        z-index: 1000;
+        width: 390px;
+        max-width: 92vw;
+        max-height: 78vh;
+        overflow-y: auto;
+        background: #ffffff;
+        border: 2px solid #bbbbbb;
+        border-radius: 14px;
+        padding: 6px 14px 14px;
+        box-shadow: 0 6px 26px rgba(0,0,0,0.28);
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -119,7 +146,7 @@ def youtube_search(query, max_results=3):
     return seen
 
 
-# ---------------------------------------------------------------- Gemini（AIキーワード提案）
+# ---------------------------------------------------------------- Gemini（AI先生チャット）
 try:
     GEMINI_API_KEY = str(st.secrets["GEMINI_API_KEY"])
 except Exception:
@@ -127,52 +154,120 @@ except Exception:
 
 GEMINI_MODEL = "gemini-2.5-flash"
 
+CHAT_SYSTEM = (
+    "あなたは小学6年生の女の子の中学受験の勉強を手伝う、やさしい家庭教師です。"
+    "添付された画像は、その子がいま見ている入試問題のページです。"
+    "次のことを守ってください。"
+    "・ひらがなを多めに、やさしく短い言葉で説明する。"
+    "・いきなり答えを言わず、考え方やヒントを順番に教える。"
+    "ただし「答えを教えて」と言われたら、解き方とあわせて答えも教える。"
+    "・はげましの言葉をそえる。"
+    "・算数の式は文字で書く（例: 3×4=12）。"
+    "・勉強と関係ない話題は、やんわり勉強にもどす。"
+)
 
-@st.cache_data(ttl=86400, show_spinner=False)
-def gemini_suggest_topics(image_path):
-    """問題ページ画像をGeminiに渡し、単元ごとの検索キーワードのリストを返す。"""
+
+def gemini_chat(image_bytes, unit_labels, history):
+    """問題画像と会話履歴を Gemini に渡し、AI先生の返事（文字列）を返す。
+    history は [{"role": "user"/"model", "text": str}, ...]（末尾は user）。
+    """
     from google import genai
     from google.genai import types
 
-    with open(image_path, "rb") as f:
-        image_bytes = f.read()
-
-    prompt = (
-        "あなたは中学受験の学習サポートです。"
-        "添付画像は中学入試の問題ページです。"
-        "このページには異なる単元の問題が複数ふくまれていることがあります。"
-        "問題をよく読み、出題されている単元を一つ一つに分けてください。"
-        "それぞれの単元について、小学生がその単元を理解するために見るとよい"
-        "YouTube解説動画を見つけるための日本語の検索キーワードを作ってください。"
-        "塾や教育チャンネルの解説動画が見つかりやすい具体的なキーワードに"
-        "してください（例:「中学受験 算数 食塩水 濃度 解説」）。"
-        "label には単元名を短く、query には検索キーワードを入れ、"
-        "単元ごとのオブジェクトの配列で答えてください。"
-    )
-
     client = genai.Client(api_key=GEMINI_API_KEY)
+    units = "、".join([u for u in unit_labels if u]) or "（未設定）"
+
+    contents = []
+    for i, msg in enumerate(history):
+        if i == 0:
+            # 最初の発言にだけ問題画像と単元情報を添える
+            parts = [
+                types.Part.from_bytes(data=image_bytes, mime_type="image/png"),
+                types.Part.from_text(
+                    text=f"【いま見ている問題ページ／単元: {units}】\n\n{msg['text']}"),
+            ]
+        else:
+            parts = [types.Part.from_text(text=msg["text"])]
+        contents.append(types.Content(role=msg["role"], parts=parts))
+
     resp = client.models.generate_content(
         model=GEMINI_MODEL,
-        contents=[
-            types.Part.from_bytes(data=image_bytes, mime_type="image/png"),
-            prompt,
-        ],
-        config=types.GenerateContentConfig(
-            response_mime_type="application/json",
-            response_schema={
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "label": {"type": "string"},
-                        "query": {"type": "string"},
-                    },
-                    "required": ["label", "query"],
-                },
-            },
-        ),
+        contents=contents,
+        config=types.GenerateContentConfig(system_instruction=CHAT_SYSTEM),
     )
-    return json.loads(resp.text)
+    return (resp.text or "").strip()
+
+
+def render_chat(exam_id, page_no, img_path, unit_labels):
+    """右下に浮かぶ AI先生チャット。問題ページごとに会話を分ける。"""
+    # 閉じているときは、右下に開くボタンだけを出す
+    if not st.session_state.get("chat_open", False):
+        with st.container(key="ai_chat_closed"):
+            if st.button("🤖 AI先生に きく", key="chat_open_btn", type="primary"):
+                st.session_state["chat_open"] = True
+                st.rerun()
+        return
+
+    with st.container(key="ai_chat_open"):
+        head = st.columns([5, 1])
+        head[0].markdown("### 🤖 AI先生")
+        if head[1].button("✕", key="chat_close_btn"):
+            st.session_state["chat_open"] = False
+            st.rerun()
+
+        if not GEMINI_API_KEY:
+            st.info("AI先生は準備中です（Gemini APIキーが未設定）。")
+            return
+
+        st.caption(
+            f"いまの問題：{page_no}ページ目／"
+            f"{'、'.join([u for u in unit_labels if u]) or '—'}"
+        )
+
+        hist_key = f"chat_{exam_id}_{page_no}"
+        history = st.session_state.setdefault(hist_key, [])
+
+        for msg in history:
+            if msg["role"] == "user":
+                with st.chat_message("user", avatar="🧒"):
+                    st.markdown(msg["text"])
+            else:
+                with st.chat_message("assistant", avatar="🤖"):
+                    st.markdown(msg["text"])
+
+        def send(text):
+            history.append({"role": "user", "text": text})
+            try:
+                with open(img_path, "rb") as f:
+                    image_bytes = f.read()
+                with st.spinner("🤖 AI先生が かんがえています…"):
+                    answer = gemini_chat(image_bytes, unit_labels, history)
+                history.append({"role": "model",
+                                "text": answer or "うまく答えられませんでした。"})
+            except Exception as e:
+                history.append({"role": "model",
+                                "text": f"ごめんね、いま答えられませんでした。({e})"})
+            st.rerun()
+
+        # 会話がまだ無いときは、ワンタップで解説を始められるようにする
+        if not history:
+            if st.button("📖 この問題を解説して",
+                         key=f"chat_quick_{exam_id}_{page_no}", width="stretch"):
+                send("この問題を、やさしく解説してください。")
+
+        with st.form(key=f"chat_form_{exam_id}_{page_no}", clear_on_submit=True):
+            user_msg = st.text_input(
+                "しつもん", label_visibility="collapsed",
+                placeholder="しつもんを入力してね…",
+            )
+            fc = st.columns([3, 2])
+            sent = fc[0].form_submit_button("送信 ▶", width="stretch")
+            cleared = fc[1].form_submit_button("会話をけす", width="stretch")
+        if sent and user_msg.strip():
+            send(user_msg.strip())
+        if cleared:
+            st.session_state[hist_key] = []
+            st.rerun()
 
 
 # ---------------------------------------------------------------- サイドバー
@@ -266,43 +361,10 @@ with right:
     st.subheader("🎬 単元ごとの関連動画")
 
     topics = page.get("topics", [])
-    pending_key = f"pending_{exam['id']}_{page['page']}"
 
-    # AIボタンの結果が保留されていれば、ウィジェット生成前に index.json へ反映
-    if pending_key in st.session_state:
-        new_topics = st.session_state.pop(pending_key)
-        save_page_topics(exam["id"], page["page"], new_topics)
-        for i in range(20):  # 古いキーワード欄の状態を掃除
-            st.session_state.pop(f"kw_{exam['id']}_{page['page']}_{i}", None)
+    if st.button("🔄 動画をさがしなおす", width="stretch"):
+        youtube_search.clear()
         st.rerun()
-
-    # 🤖 AIにおまかせボタン（ページ全体の単元を判定しなおす）
-    ai_disabled = not GEMINI_API_KEY
-    cols = st.columns([3, 2])
-    with cols[0]:
-        if st.button(
-            "🤖 AIに単元を見つけてもらう",
-            width="stretch",
-            disabled=ai_disabled,
-            type="primary",
-        ):
-            try:
-                with st.spinner("🤖 AIが問題を読んでいます…"):
-                    result = gemini_suggest_topics(img_path)
-                if result:
-                    st.session_state[pending_key] = result
-                    st.rerun()
-                else:
-                    st.warning("AIが単元を判定できませんでした。")
-            except Exception as e:
-                st.error(f"AIの呼び出しに失敗しました: {e}")
-    with cols[1]:
-        if st.button("🔄 動画をさがしなおす", width="stretch"):
-            youtube_search.clear()
-            st.rerun()
-
-    if ai_disabled:
-        st.caption("💡 AI機能を使うには Gemini APIキーの設定が必要です（READMEを参照）。")
 
     if not topics:
         st.info("このページには単元が登録されていません。")
@@ -357,4 +419,10 @@ st.divider()
 st.caption(
     f"出典: 江戸川女子中学校 入試問題（{exam['source_pdf']}） / "
     "学習用の個人利用アプリ"
+)
+
+# ---------------------------------------------------------------- AI先生チャット（右下フロート）
+render_chat(
+    exam["id"], page["page"], img_path,
+    [t.get("label", "") for t in page.get("topics", [])],
 )
