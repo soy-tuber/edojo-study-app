@@ -37,7 +37,7 @@ st.markdown(
         overflow-y: auto;
         padding-right: 12px;
     }
-    /* AI先生チャット：右下に常に表示する浮動パネル */
+    /* AI先生チャット：右下に表示する浮動パネル */
     .st-key-ai_chat {
         position: fixed;
         bottom: 1.2rem;
@@ -52,6 +52,17 @@ st.markdown(
         border-radius: 14px;
         padding: 6px 14px 14px;
         box-shadow: 0 6px 26px rgba(0,0,0,0.28);
+    }
+    /* AI先生チャット：最小化中（右下の小さなボタンだけ） */
+    .st-key-ai_chat_min {
+        position: fixed;
+        bottom: 1.2rem;
+        right: 1.2rem;
+        z-index: 1000;
+    }
+    .st-key-ai_chat_min button {
+        box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+        border-radius: 24px;
     }
     </style>
     """,
@@ -188,9 +199,21 @@ def gemini_chat(image_bytes, unit_labels, history):
 
 
 def render_chat(exam_id, page_no, img_path, unit_labels):
-    """右下に常に表示する AI先生チャット。問題ページごとに会話を分ける。"""
+    """右下に表示する AI先生チャット（最小化できる）。問題ページごとに会話を分ける。"""
+    # 最小化中は、右下に小さな「ひらく」ボタンだけを出す
+    if st.session_state.get("chat_min", False):
+        with st.container(key="ai_chat_min"):
+            if st.button("🤖 AI先生をひらく", key="chat_expand_btn", type="primary"):
+                st.session_state["chat_min"] = False
+                st.rerun()
+        return
+
     with st.container(key="ai_chat"):
-        st.markdown("### 🤖 AI先生")
+        head = st.columns([5, 1])
+        head[0].markdown("### 🤖 AI先生")
+        if head[1].button("—", key="chat_min_btn", help="最小化"):
+            st.session_state["chat_min"] = True
+            st.rerun()
 
         if not GEMINI_API_KEY:
             st.info("AI先生は準備中です（Gemini APIキーが未設定）。")
