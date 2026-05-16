@@ -19,6 +19,29 @@ VIDEOS_PER_TOPIC = 3  # 各単元で表示する動画の本数
 
 st.set_page_config(page_title="江戸女 入試問題 勉強アプリ", page_icon="📚", layout="wide")
 
+# 左の問題画像は固定したまま、右カラム（動画一覧）の中だけをスクロールできるようにする。
+# stImage を含むカラム＝左、stTextInput を含むカラム＝右 を :has() で選び分ける。
+st.markdown(
+    """
+    <style>
+    /* 問題画像は画面の高さに収め、全体が見えるようにする */
+    div[data-testid="column"]:has([data-testid="stImage"]) [data-testid="stImage"] img {
+        max-height: 80vh;
+        width: auto !important;
+        margin: 0 auto;
+        display: block;
+    }
+    /* 右カラムはカラム内にスクロールバーを出し、動画だけをスクロールさせる */
+    div[data-testid="column"]:has([data-testid="stTextInput"]) {
+        max-height: 80vh;
+        overflow-y: auto;
+        padding-right: 12px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 
 # ---------------------------------------------------------------- PINロック
 # PINは Streamlit secrets（APP_PIN）で上書き可能。未設定時は下記の既定値を使用。
