@@ -25,14 +25,14 @@ st.markdown(
     """
     <style>
     /* 問題画像は画面の高さに収め、全体が見えるようにする */
-    div[data-testid="column"]:has([data-testid="stImage"]) [data-testid="stImage"] img {
+    div[data-testid="stColumn"]:has([data-testid="stImage"]) [data-testid="stImage"] img {
         max-height: 80vh;
         width: auto !important;
         margin: 0 auto;
         display: block;
     }
     /* 右カラムはカラム内にスクロールバーを出し、動画だけをスクロールさせる */
-    div[data-testid="column"]:has([data-testid="stTextInput"]) {
+    div[data-testid="stColumn"]:has([data-testid="stTextInput"]) {
         max-height: 80vh;
         overflow-y: auto;
         padding-right: 12px;
