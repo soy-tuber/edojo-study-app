@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 """
 edojo_2025 の問題PDFを 1ページ=1枚のPNG画像に変換し、index.json を生成する。
-再実行しても安全（画像は上書き、index.json は既存のキーワード編集を引き継ぐ）。
+再実行しても安全（画像は上書き、index.json は既存の単元・キーワード編集を引き継ぐ）。
+
+index.json のスキーマ:
+  各ページは topics（単元ごとの {label, query} のリスト）を持つ。
+  1ページに複数単元の問題があるため、単元ごとに動画を出し分ける。
 """
 import json
 import os
@@ -29,16 +33,6 @@ EXAMS = [
     ("shakai_r3", "20253shamondai.pdf", "社会", "第3回", "中学受験 社会 解説"),
 ]
 
-# 算数第1回は問題内容が判明しているため、ページ別の検索キーワードを事前設定。
-# キー: (exam_id, ページ番号 1始まり) -> キーワード
-KNOWN_TOPICS = {
-    ("san_r1", 2): "中学受験 算数 計算問題 やり方",
-    ("san_r1", 4): "中学受験 算数 速さ 旅人算 角度 体積比",
-    ("san_r1", 6): "中学受験 算数 図形の転がり 分数の規則性",
-    ("san_r1", 8): "中学受験 算数 水そうグラフ 体積変化",
-    ("san_r1", 10): "中学受験 算数 食塩水 濃度 やりとり",
-}
-
 
 def classify(text: str):
     """ページ種別を返す: 'title' / 'blank' / 'problem'"""
@@ -54,7 +48,7 @@ def classify(text: str):
 
 
 def load_existing_topics():
-    """既存 index.json からユーザーが編集したキーワードを回収する。"""
+    """既存 index.json から、確定済みの単元（topics）を回収する。"""
     saved = {}
     if os.path.exists(INDEX_PATH):
         try:
@@ -62,7 +56,8 @@ def load_existing_topics():
                 data = json.load(f)
             for exam in data.get("exams", []):
                 for pg in exam.get("pages", []):
-                    saved[(exam["id"], pg["page"])] = pg.get("topic", "")
+                    if pg.get("topics"):
+                        saved[(exam["id"], pg["page"])] = pg["topics"]
         except Exception as e:
             print(f"  (既存 index.json 読み込みスキップ: {e})")
     return saved
@@ -90,16 +85,20 @@ def main():
             pix = page.get_pixmap(matrix=fitz.Matrix(ZOOM, ZOOM))
             pix.save(os.path.join(exam_dir, img_name))
 
-            # キーワード優先順: ユーザー編集 > 既知 > 科目既定
-            topic = saved_topics.get((exam_id, page_no))
-            if not topic:
-                topic = KNOWN_TOPICS.get((exam_id, page_no), default_kw)
+            # 単元: 既存 index.json の確定済み topics を引き継ぐ。
+            # 未確定の問題ページは科目既定のキーワードを1件だけ入れておく。
+            topics = saved_topics.get((exam_id, page_no))
+            if topics is None:
+                if kind == "problem":
+                    topics = [{"label": "解説", "query": default_kw}]
+                else:
+                    topics = []
 
             pages_out.append({
                 "page": page_no,
                 "image": f"pages/{exam_id}/{img_name}",
                 "kind": kind,          # title / blank / problem
-                "topic": topic,
+                "topics": topics,
             })
         doc.close()
 

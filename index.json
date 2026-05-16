@@ -11,73 +11,126 @@
           "page": 1,
           "image": "pages/san_r1/p01.png",
           "kind": "title",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 2,
           "image": "pages/san_r1/p02.png",
           "kind": "problem",
-          "topic": "中学受験 算数 計算問題 やり方"
+          "topics": [
+            {
+              "label": "四則計算・逆算",
+              "query": "中学受験 算数 四則計算 逆算 やり方"
+            },
+            {
+              "label": "場合の数",
+              "query": "中学受験 算数 場合の数 整数を作る"
+            },
+            {
+              "label": "過不足算（長椅子）",
+              "query": "中学受験 算数 過不足算 長椅子"
+            },
+            {
+              "label": "年令算",
+              "query": "中学受験 算数 年令算"
+            },
+            {
+              "label": "つるかめ算",
+              "query": "中学受験 算数 つるかめ算"
+            }
+          ]
         },
         {
           "page": 3,
           "image": "pages/san_r1/p03.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 4,
           "image": "pages/san_r1/p04.png",
           "kind": "problem",
-          "topic": "中学受験 算数 速さ 旅人算 角度 体積比"
+          "topics": [
+            {
+              "label": "旅人算（池の周り・出会い算）",
+              "query": "中学受験 算数 旅人算 池の周り 出会い算"
+            },
+            {
+              "label": "角度（角の三等分）",
+              "query": "中学受験 算数 角度 三角形 角の三等分"
+            },
+            {
+              "label": "直方体の体積比",
+              "query": "中学受験 算数 直方体 体積比"
+            }
+          ]
         },
         {
           "page": 5,
           "image": "pages/san_r1/p05.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 6,
           "image": "pages/san_r1/p06.png",
           "kind": "problem",
-          "topic": "中学受験 算数 図形の転がり 分数の規則性"
+          "topics": [
+            {
+              "label": "図形の転がり移動",
+              "query": "中学受験 算数 正三角形 転がり移動 点の動いた長さ"
+            },
+            {
+              "label": "規則性（分数の数列）",
+              "query": "中学受験 算数 規則性 分数の数列"
+            }
+          ]
         },
         {
           "page": 7,
           "image": "pages/san_r1/p07.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 8,
           "image": "pages/san_r1/p08.png",
           "kind": "problem",
-          "topic": "中学受験 算数 水そうグラフ 体積変化"
+          "topics": [
+            {
+              "label": "水量とグラフ",
+              "query": "中学受験 算数 水そう 水位とグラフ"
+            }
+          ]
         },
         {
           "page": 9,
           "image": "pages/san_r1/p09.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 10,
           "image": "pages/san_r1/p10.png",
           "kind": "problem",
-          "topic": "中学受験 算数 食塩水 濃度 やりとり"
+          "topics": [
+            {
+              "label": "食塩水の濃度",
+              "query": "中学受験 算数 食塩水 濃度 解説"
+            }
+          ]
         },
         {
           "page": 11,
           "image": "pages/san_r1/p11.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 12,
           "image": "pages/san_r1/p12.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         }
       ]
     },
@@ -92,73 +145,126 @@
           "page": 1,
           "image": "pages/san_r2/p01.png",
           "kind": "title",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 2,
           "image": "pages/san_r2/p02.png",
           "kind": "problem",
-          "topic": "中学受験 算数 計算問題 食塩水 つるかめ算"
+          "topics": [
+            {
+              "label": "四則計算・逆算",
+              "query": "中学受験 算数 四則計算 分数 逆算"
+            },
+            {
+              "label": "素因数分解",
+              "query": "中学受験 算数 素因数分解 2025"
+            },
+            {
+              "label": "場合の数（硬貨）",
+              "query": "中学受験 算数 場合の数 硬貨の組み合わせ"
+            },
+            {
+              "label": "食塩水の濃度",
+              "query": "中学受験 算数 食塩水 濃度"
+            },
+            {
+              "label": "消去算（つるかめ算）",
+              "query": "中学受験 算数 消去算 つるかめ算"
+            }
+          ]
         },
         {
           "page": 3,
           "image": "pages/san_r2/p03.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 4,
           "image": "pages/san_r2/p04.png",
           "kind": "problem",
-          "topic": "中学受験 算数 旅人算 角度 おうぎ形の面積"
+          "topics": [
+            {
+              "label": "速さ（旅人算）",
+              "query": "中学受験 算数 速さ 旅人算"
+            },
+            {
+              "label": "多角形の角度",
+              "query": "中学受験 算数 多角形 角度"
+            },
+            {
+              "label": "円・おうぎ形の面積",
+              "query": "中学受験 算数 円 おうぎ形 面積"
+            }
+          ]
         },
         {
           "page": 5,
           "image": "pages/san_r2/p05.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 6,
           "image": "pages/san_r2/p06.png",
           "kind": "problem",
-          "topic": "中学受験 算数 立方体の切断 約束記号"
+          "topics": [
+            {
+              "label": "立方体の切断と体積",
+              "query": "中学受験 算数 立方体の切断 体積"
+            },
+            {
+              "label": "約束記号",
+              "query": "中学受験 算数 約束記号"
+            }
+          ]
         },
         {
           "page": 7,
           "image": "pages/san_r2/p07.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 8,
           "image": "pages/san_r2/p08.png",
           "kind": "problem",
-          "topic": "中学受験 算数 図形の移動 重なる面積"
+          "topics": [
+            {
+              "label": "図形の移動（重なる面積）",
+              "query": "中学受験 算数 図形の移動 重なる面積"
+            }
+          ]
         },
         {
           "page": 9,
           "image": "pages/san_r2/p09.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 10,
           "image": "pages/san_r2/p10.png",
           "kind": "problem",
-          "topic": "中学受験 算数 水の分配 規則性"
+          "topics": [
+            {
+              "label": "規則性（水の分配）",
+              "query": "中学受験 算数 水の分配 規則性"
+            }
+          ]
         },
         {
           "page": 11,
           "image": "pages/san_r2/p11.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 12,
           "image": "pages/san_r2/p12.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         }
       ]
     },
@@ -173,73 +279,130 @@
           "page": 1,
           "image": "pages/san_r3/p01.png",
           "kind": "title",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 2,
           "image": "pages/san_r3/p02.png",
           "kind": "problem",
-          "topic": "中学受験 算数 計算問題 場合の数 食塩水"
+          "topics": [
+            {
+              "label": "四則計算・逆算",
+              "query": "中学受験 算数 四則計算 分数 逆算"
+            },
+            {
+              "label": "場合の数",
+              "query": "中学受験 算数 場合の数 整数を作る"
+            },
+            {
+              "label": "和差算",
+              "query": "中学受験 算数 和差算"
+            },
+            {
+              "label": "食塩水の濃度",
+              "query": "中学受験 算数 食塩水 濃度"
+            },
+            {
+              "label": "つるかめ算（損益）",
+              "query": "中学受験 算数 つるかめ算 損益算"
+            }
+          ]
         },
         {
           "page": 3,
           "image": "pages/san_r3/p03.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 4,
           "image": "pages/san_r3/p04.png",
           "kind": "problem",
-          "topic": "中学受験 算数 旅人算 平行四辺形の角度 円の転がり"
+          "topics": [
+            {
+              "label": "速さと時間",
+              "query": "中学受験 算数 速さ 出発時刻 旅人算"
+            },
+            {
+              "label": "平行四辺形の角度",
+              "query": "中学受験 算数 平行四辺形 角度"
+            },
+            {
+              "label": "円の転がり移動",
+              "query": "中学受験 算数 円の転がり移動 面積"
+            }
+          ]
         },
         {
           "page": 5,
           "image": "pages/san_r3/p05.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 6,
           "image": "pages/san_r3/p06.png",
           "kind": "problem",
-          "topic": "中学受験 算数 立体の体積 つるかめ算"
+          "topics": [
+            {
+              "label": "立方体のくりぬき（体積）",
+              "query": "中学受験 算数 立方体 くりぬき 体積"
+            },
+            {
+              "label": "つるかめ算",
+              "query": "中学受験 算数 つるかめ算"
+            },
+            {
+              "label": "損益算",
+              "query": "中学受験 算数 損益算 利益"
+            }
+          ]
         },
         {
           "page": 7,
           "image": "pages/san_r3/p07.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 8,
           "image": "pages/san_r3/p08.png",
           "kind": "problem",
-          "topic": "中学受験 算数 平方数 素因数分解"
+          "topics": [
+            {
+              "label": "平方数",
+              "query": "中学受験 算数 平方数 数の性質"
+            }
+          ]
         },
         {
           "page": 9,
           "image": "pages/san_r3/p09.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 10,
           "image": "pages/san_r3/p10.png",
           "kind": "problem",
-          "topic": "中学受験 算数 点の移動 三角形の面積"
+          "topics": [
+            {
+              "label": "点の移動と三角形の面積",
+              "query": "中学受験 算数 点の移動 三角形の面積"
+            }
+          ]
         },
         {
           "page": 11,
           "image": "pages/san_r3/p11.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         },
         {
           "page": 12,
           "image": "pages/san_r3/p12.png",
           "kind": "blank",
-          "topic": "中学受験 算数 解説"
+          "topics": []
         }
       ]
     },
@@ -254,73 +417,138 @@
           "page": 1,
           "image": "pages/rika_r1/p01.png",
           "kind": "title",
-          "topic": "中学受験 理科 解説"
+          "topics": []
         },
         {
           "page": 2,
           "image": "pages/rika_r1/p02.png",
           "kind": "problem",
-          "topic": "中学受験 理科 気体の性質 二酸化炭素 アンモニア"
+          "topics": [
+            {
+              "label": "気体の性質",
+              "query": "中学受験 理科 気体の性質 酸素 水素 二酸化炭素 アンモニア"
+            },
+            {
+              "label": "リトマス紙・水溶液",
+              "query": "中学受験 理科 リトマス紙 酸性 アルカリ性"
+            }
+          ]
         },
         {
           "page": 3,
           "image": "pages/rika_r1/p03.png",
           "kind": "problem",
-          "topic": "中学受験 理科 燃料電池 発電方法 二酸化炭素"
+          "topics": [
+            {
+              "label": "燃料電池",
+              "query": "中学受験 理科 燃料電池"
+            },
+            {
+              "label": "発電方法と地球温暖化",
+              "query": "中学受験 理科 発電方法 火力発電 地球温暖化"
+            }
+          ]
         },
         {
           "page": 4,
           "image": "pages/rika_r1/p04.png",
           "kind": "problem",
-          "topic": "中学受験 理科 浮力 ばねばかり"
+          "topics": [
+            {
+              "label": "浮力（ばねばかり）",
+              "query": "中学受験 理科 浮力 ばねばかり"
+            }
+          ]
         },
         {
           "page": 5,
           "image": "pages/rika_r1/p05.png",
           "kind": "problem",
-          "topic": "中学受験 理科 浮力 アルキメデスの原理"
+          "topics": [
+            {
+              "label": "浮力（アルキメデスの原理）",
+              "query": "中学受験 理科 浮力 アルキメデスの原理"
+            }
+          ]
         },
         {
           "page": 6,
           "image": "pages/rika_r1/p06.png",
           "kind": "problem",
-          "topic": "中学受験 理科 浮力 密度 液体"
+          "topics": [
+            {
+              "label": "浮力の計算・密度",
+              "query": "中学受験 理科 浮力 計算問題 密度"
+            }
+          ]
         },
         {
           "page": 7,
           "image": "pages/rika_r1/p07.png",
           "kind": "problem",
-          "topic": "中学受験 理科 浮力 計算問題"
+          "topics": [
+            {
+              "label": "浮力の計算（物体の浮き沈み）",
+              "query": "中学受験 理科 浮力 計算 物体の浮き沈み"
+            }
+          ]
         },
         {
           "page": 8,
           "image": "pages/rika_r1/p08.png",
           "kind": "problem",
-          "topic": "中学受験 理科 昆虫 完全変態 不完全変態"
+          "topics": [
+            {
+              "label": "昆虫のからだと変態",
+              "query": "中学受験 理科 昆虫 完全変態 不完全変態"
+            },
+            {
+              "label": "動物の分類",
+              "query": "中学受験 理科 セキツイ動物 無セキツイ動物 分類"
+            }
+          ]
         },
         {
           "page": 9,
           "image": "pages/rika_r1/p09.png",
           "kind": "problem",
-          "topic": "中学受験 理科 高気圧 低気圧 前線"
+          "topics": [
+            {
+              "label": "高気圧と低気圧",
+              "query": "中学受験 理科 高気圧 低気圧"
+            },
+            {
+              "label": "前線",
+              "query": "中学受験 理科 前線 温暖前線 寒冷前線"
+            }
+          ]
         },
         {
           "page": 10,
           "image": "pages/rika_r1/p10.png",
           "kind": "problem",
-          "topic": "中学受験 理科 台風 フェーン現象"
+          "topics": [
+            {
+              "label": "台風",
+              "query": "中学受験 理科 台風"
+            },
+            {
+              "label": "海陸風・フェーン現象",
+              "query": "中学受験 理科 海陸風 フェーン現象"
+            }
+          ]
         },
         {
           "page": 11,
           "image": "pages/rika_r1/p11.png",
           "kind": "blank",
-          "topic": "中学受験 理科 解説"
+          "topics": []
         },
         {
           "page": 12,
           "image": "pages/rika_r1/p12.png",
           "kind": "blank",
-          "topic": "中学受験 理科 解説"
+          "topics": []
         }
       ]
     },
@@ -335,67 +563,149 @@
           "page": 1,
           "image": "pages/rika_r2/p01.png",
           "kind": "title",
-          "topic": "中学受験 理科 解説"
+          "topics": []
         },
         {
           "page": 2,
           "image": "pages/rika_r2/p02.png",
           "kind": "problem",
-          "topic": "中学受験 理科 打ち水 ヒートアイランド現象"
+          "topics": [
+            {
+              "label": "打ち水と気化熱",
+              "query": "中学受験 理科 打ち水 気化熱"
+            },
+            {
+              "label": "ヒートアイランド現象",
+              "query": "中学受験 理科 ヒートアイランド現象"
+            }
+          ]
         },
         {
           "page": 3,
           "image": "pages/rika_r2/p03.png",
           "kind": "problem",
-          "topic": "中学受験 理科 熱量 カロリー計算 対流"
+          "topics": [
+            {
+              "label": "気体（ドライアイス）",
+              "query": "中学受験 理科 二酸化炭素 ドライアイス"
+            },
+            {
+              "label": "熱量・カロリーの計算",
+              "query": "中学受験 理科 熱量 カロリー計算"
+            }
+          ]
         },
         {
           "page": 4,
           "image": "pages/rika_r2/p04.png",
           "kind": "problem",
-          "topic": "中学受験 理科 熱の伝わり方 対流"
+          "topics": [
+            {
+              "label": "熱の伝わり方（対流）",
+              "query": "中学受験 理科 熱の伝わり方 伝導 対流 放射"
+            }
+          ]
         },
         {
           "page": 5,
           "image": "pages/rika_r2/p05.png",
           "kind": "problem",
-          "topic": "中学受験 理科 電気回路 電流計 電球"
+          "topics": [
+            {
+              "label": "電流計の使い方",
+              "query": "中学受験 理科 電流計の使い方 つなぎ方"
+            },
+            {
+              "label": "回路と豆電球",
+              "query": "中学受験 理科 豆電球 回路"
+            }
+          ]
         },
         {
           "page": 6,
           "image": "pages/rika_r2/p06.png",
           "kind": "problem",
-          "topic": "中学受験 理科 電熱線 電流の大きさ"
+          "topics": [
+            {
+              "label": "電熱線と電流",
+              "query": "中学受験 理科 電熱線 電流の大きさ"
+            },
+            {
+              "label": "直列回路と並列回路",
+              "query": "中学受験 理科 直列回路 並列回路"
+            }
+          ]
         },
         {
           "page": 7,
           "image": "pages/rika_r2/p07.png",
           "kind": "problem",
-          "topic": "中学受験 理科 電熱線 並列回路 計算"
+          "topics": [
+            {
+              "label": "電熱線と電気抵抗",
+              "query": "中学受験 理科 電熱線 電気抵抗"
+            },
+            {
+              "label": "電球の明るさ",
+              "query": "中学受験 理科 豆電球 明るさ 回路"
+            }
+          ]
         },
         {
           "page": 8,
           "image": "pages/rika_r2/p08.png",
           "kind": "problem",
-          "topic": "中学受験 理科 アサガオ 花のつくり"
+          "topics": [
+            {
+              "label": "アサガオの花のつくり",
+              "query": "中学受験 理科 アサガオ 花のつくり"
+            },
+            {
+              "label": "植物の分類・葉のつき方",
+              "query": "中学受験 理科 単子葉類 双子葉類 葉のつき方"
+            }
+          ]
         },
         {
           "page": 9,
           "image": "pages/rika_r2/p09.png",
           "kind": "problem",
-          "topic": "中学受験 理科 光合成 蒸散 葉のつくり"
+          "topics": [
+            {
+              "label": "葉の構造と光合成",
+              "query": "中学受験 理科 光合成 葉緑体"
+            },
+            {
+              "label": "蒸散",
+              "query": "中学受験 理科 蒸散 葉のつくり"
+            }
+          ]
         },
         {
           "page": 10,
           "image": "pages/rika_r2/p10.png",
           "kind": "problem",
-          "topic": "中学受験 理科 プレート 地震"
+          "topics": [
+            {
+              "label": "プレートと地震",
+              "query": "中学受験 理科 プレート 地震"
+            }
+          ]
         },
         {
           "page": 11,
           "image": "pages/rika_r2/p11.png",
           "kind": "problem",
-          "topic": "中学受験 理科 南海トラフ 初期微動 地震の計算"
+          "topics": [
+            {
+              "label": "南海トラフ",
+              "query": "中学受験 理科 南海トラフ 海溝"
+            },
+            {
+              "label": "地震の計算（初期微動継続時間）",
+              "query": "中学受験 理科 地震 初期微動継続時間 計算"
+            }
+          ]
         }
       ]
     },
@@ -410,61 +720,125 @@
           "page": 1,
           "image": "pages/rika_r3/p01.png",
           "kind": "title",
-          "topic": "中学受験 理科 解説"
+          "topics": []
         },
         {
           "page": 2,
           "image": "pages/rika_r3/p02.png",
           "kind": "problem",
-          "topic": "中学受験 理科 石灰石 塩酸 気体の発生 計算"
+          "topics": [
+            {
+              "label": "二酸化炭素の発生",
+              "query": "中学受験 理科 石灰石 塩酸 二酸化炭素"
+            },
+            {
+              "label": "気体の性質",
+              "query": "中学受験 理科 二酸化炭素 気体の性質"
+            }
+          ]
         },
         {
           "page": 3,
           "image": "pages/rika_r3/p03.png",
           "kind": "problem",
-          "topic": "中学受験 理科 塩酸 石灰石 過不足 計算問題"
+          "topics": [
+            {
+              "label": "化学反応の計算（過不足）",
+              "query": "中学受験 理科 石灰石 塩酸 過不足 計算"
+            }
+          ]
         },
         {
           "page": 4,
           "image": "pages/rika_r3/p04.png",
           "kind": "problem",
-          "topic": "中学受験 理科 音の速さ 振動数"
+          "topics": [
+            {
+              "label": "音の性質と速さ",
+              "query": "中学受験 理科 音の伝わり方 速さ"
+            },
+            {
+              "label": "音の高さと振動数",
+              "query": "中学受験 理科 音 振動数 高さ"
+            }
+          ]
         },
         {
           "page": 5,
           "image": "pages/rika_r3/p05.png",
           "kind": "problem",
-          "topic": "中学受験 理科 ドップラー効果 音"
+          "topics": [
+            {
+              "label": "音の反射と速さの計算",
+              "query": "中学受験 理科 音の反射 速さ 計算"
+            },
+            {
+              "label": "ドップラー効果",
+              "query": "中学受験 理科 ドップラー効果"
+            }
+          ]
         },
         {
           "page": 6,
           "image": "pages/rika_r3/p06.png",
           "kind": "problem",
-          "topic": "中学受験 理科 ウイルス 細菌 病原体"
+          "topics": [
+            {
+              "label": "病原体（細菌とウイルス）",
+              "query": "中学受験 理科 細菌 ウイルス 感染症"
+            }
+          ]
         },
         {
           "page": 7,
           "image": "pages/rika_r3/p07.png",
           "kind": "problem",
-          "topic": "中学受験 理科 血液 赤血球 白血球 血小板"
+          "topics": [
+            {
+              "label": "血液の成分とはたらき",
+              "query": "中学受験 理科 血液 赤血球 白血球 血小板"
+            },
+            {
+              "label": "血液の循環",
+              "query": "中学受験 理科 血液の循環 心臓"
+            }
+          ]
         },
         {
           "page": 8,
           "image": "pages/rika_r3/p08.png",
           "kind": "problem",
-          "topic": "中学受験 理科 冬の大三角 星座"
+          "topics": [
+            {
+              "label": "冬の星座",
+              "query": "中学受験 理科 冬の大三角 星座"
+            },
+            {
+              "label": "星の動き（日周運動）",
+              "query": "中学受験 理科 星の動き 日周運動"
+            }
+          ]
         },
         {
           "page": 9,
           "image": "pages/rika_r3/p09.png",
           "kind": "problem",
-          "topic": "中学受験 理科 月の動き 星の動き"
+          "topics": [
+            {
+              "label": "月の動きと満ち欠け",
+              "query": "中学受験 理科 月の満ち欠け 月の動き"
+            },
+            {
+              "label": "星の動き",
+              "query": "中学受験 理科 星の動き カシオペヤ座"
+            }
+          ]
         },
         {
           "page": 10,
           "image": "pages/rika_r3/p10.png",
           "kind": "blank",
-          "topic": "中学受験 理科 解説"
+          "topics": []
         }
       ]
     },
@@ -479,73 +853,159 @@
           "page": 1,
           "image": "pages/shakai_r1/p01.png",
           "kind": "title",
-          "topic": "中学受験 社会 解説"
+          "topics": []
         },
         {
           "page": 2,
           "image": "pages/shakai_r1/p02.png",
           "kind": "problem",
-          "topic": "中学受験 社会 歴史 時代の並べかえ"
+          "topics": [
+            {
+              "label": "歴史（通史・時代の並べかえ）",
+              "query": "中学受験 社会 歴史 時代の並べかえ 通史"
+            }
+          ]
         },
         {
           "page": 3,
           "image": "pages/shakai_r1/p03.png",
           "kind": "problem",
-          "topic": "中学受験 社会 歴史 楽市楽座 倭寇"
+          "topics": [
+            {
+              "label": "室町・安土桃山時代",
+              "query": "中学受験 社会 楽市楽座 倭寇 勘合貿易"
+            },
+            {
+              "label": "大正デモクラシー・女性運動",
+              "query": "中学受験 社会 平塚らいてう 市川房枝 女性運動"
+            }
+          ]
         },
         {
           "page": 4,
           "image": "pages/shakai_r1/p04.png",
           "kind": "problem",
-          "topic": "中学受験 社会 歴史 浄土信仰 平等院鳳凰堂"
+          "topics": [
+            {
+              "label": "浄土信仰と平安文化",
+              "query": "中学受験 社会 浄土信仰 阿弥陀如来 平等院鳳凰堂"
+            }
+          ]
         },
         {
           "page": 5,
           "image": "pages/shakai_r1/p05.png",
           "kind": "problem",
-          "topic": "中学受験 社会 歴史 摂関政治 鎌倉仏教"
+          "topics": [
+            {
+              "label": "摂関政治",
+              "query": "中学受験 社会 摂関政治 藤原氏"
+            },
+            {
+              "label": "鎌倉新仏教",
+              "query": "中学受験 社会 鎌倉新仏教 念仏 一向一揆"
+            }
+          ]
         },
         {
           "page": 6,
           "image": "pages/shakai_r1/p06.png",
           "kind": "problem",
-          "topic": "中学受験 社会 地理 地図の読み取り 江戸川区"
+          "topics": [
+            {
+              "label": "地形図の読み取り",
+              "query": "中学受験 社会 地形図の読み取り"
+            },
+            {
+              "label": "川がつくる地形",
+              "query": "中学受験 社会 川がつくる地形 平野"
+            }
+          ]
         },
         {
           "page": 7,
           "image": "pages/shakai_r1/p07.png",
           "kind": "problem",
-          "topic": "中学受験 社会 地理 工業地帯 統計グラフ"
+          "topics": [
+            {
+              "label": "日本の地形（半島・岬）",
+              "query": "中学受験 社会 日本の半島 岬 地名"
+            },
+            {
+              "label": "工業地帯・工業地域",
+              "query": "中学受験 社会 工業地帯 工業地域"
+            }
+          ]
         },
         {
           "page": 8,
           "image": "pages/shakai_r1/p08.png",
           "kind": "problem",
-          "topic": "中学受験 社会 地理 昼夜間人口 農産物"
+          "topics": [
+            {
+              "label": "昼夜間人口",
+              "query": "中学受験 社会 昼夜間人口比率"
+            },
+            {
+              "label": "農産物の統計",
+              "query": "中学受験 社会 都道府県 農業 統計"
+            },
+            {
+              "label": "ハザードマップ・防災",
+              "query": "中学受験 社会 ハザードマップ 防災"
+            }
+          ]
         },
         {
           "page": 9,
           "image": "pages/shakai_r1/p09.png",
           "kind": "problem",
-          "topic": "中学受験 社会 公民 日本銀行 財政"
+          "topics": [
+            {
+              "label": "日本銀行とお金のはたらき",
+              "query": "中学受験 社会 公民 日本銀行 お金のはたらき"
+            },
+            {
+              "label": "国民主権と基本的人権",
+              "query": "中学受験 社会 公民 国民主権 基本的人権"
+            }
+          ]
         },
         {
           "page": 10,
           "image": "pages/shakai_r1/p10.png",
           "kind": "problem",
-          "topic": "中学受験 社会 公民 基本的人権 選挙"
+          "topics": [
+            {
+              "label": "基本的人権（社会権・選挙権）",
+              "query": "中学受験 社会 公民 社会権 選挙権"
+            },
+            {
+              "label": "景気と金融",
+              "query": "中学受験 社会 公民 景気 日本銀行"
+            }
+          ]
         },
         {
           "page": 11,
           "image": "pages/shakai_r1/p11.png",
           "kind": "problem",
-          "topic": "中学受験 社会 公民 三権分立 国際連合"
+          "topics": [
+            {
+              "label": "三権分立",
+              "query": "中学受験 社会 公民 三権分立 国会 内閣 裁判所"
+            },
+            {
+              "label": "国際連合",
+              "query": "中学受験 社会 公民 国際連合 専門機関"
+            }
+          ]
         },
         {
           "page": 12,
           "image": "pages/shakai_r1/p12.png",
           "kind": "blank",
-          "topic": "中学受験 社会 解説"
+          "topics": []
         }
       ]
     },
@@ -560,73 +1020,142 @@
           "page": 1,
           "image": "pages/shakai_r2/p01.png",
           "kind": "title",
-          "topic": "中学受験 社会 解説"
+          "topics": []
         },
         {
           "page": 2,
           "image": "pages/shakai_r2/p02.png",
           "kind": "problem",
-          "topic": "中学受験 社会 歴史 時代の並べかえ 各時代の特色"
+          "topics": [
+            {
+              "label": "歴史（通史・時代の並べかえ）",
+              "query": "中学受験 社会 歴史 時代の並べかえ 通史"
+            }
+          ]
         },
         {
           "page": 3,
           "image": "pages/shakai_r2/p03.png",
           "kind": "problem",
-          "topic": "中学受験 社会 歴史 古今和歌集 倭寇"
+          "topics": [
+            {
+              "label": "古今和歌集と和歌",
+              "query": "中学受験 社会 古今和歌集 万葉集 和歌"
+            },
+            {
+              "label": "勘合貿易・倭寇",
+              "query": "中学受験 社会 勘合貿易 倭寇"
+            }
+          ]
         },
         {
           "page": 4,
           "image": "pages/shakai_r2/p04.png",
           "kind": "problem",
-          "topic": "中学受験 社会 歴史 樋口一葉 津田梅子 明治時代"
+          "topics": [
+            {
+              "label": "明治時代の人物（津田梅子・樋口一葉）",
+              "query": "中学受験 社会 津田梅子 樋口一葉 明治時代"
+            }
+          ]
         },
         {
           "page": 5,
           "image": "pages/shakai_r2/p05.png",
           "kind": "problem",
-          "topic": "中学受験 社会 歴史 日清戦争 第一次世界大戦"
+          "topics": [
+            {
+              "label": "条約改正",
+              "query": "中学受験 社会 条約改正 不平等条約"
+            },
+            {
+              "label": "第一次世界大戦",
+              "query": "中学受験 社会 第一次世界大戦"
+            }
+          ]
         },
         {
           "page": 6,
           "image": "pages/shakai_r2/p06.png",
           "kind": "problem",
-          "topic": "中学受験 社会 地理 長野県 中部地方 地図"
+          "topics": [
+            {
+              "label": "中部地方の地理（長野県）",
+              "query": "中学受験 社会 長野県 中部地方"
+            }
+          ]
         },
         {
           "page": 7,
           "image": "pages/shakai_r2/p07.png",
           "kind": "problem",
-          "topic": "中学受験 社会 地理 中部地方 果樹栽培 統計"
+          "topics": [
+            {
+              "label": "果樹栽培と農業統計",
+              "query": "中学受験 社会 果樹栽培 ぶどう もも 統計"
+            },
+            {
+              "label": "伝統工芸品",
+              "query": "中学受験 社会 伝統工芸品"
+            }
+          ]
         },
         {
           "page": 8,
           "image": "pages/shakai_r2/p08.png",
           "kind": "problem",
-          "topic": "中学受験 社会 公民 憲法 違憲審査"
+          "topics": [
+            {
+              "label": "憲法と違憲審査",
+              "query": "中学受験 社会 公民 憲法 違憲審査"
+            },
+            {
+              "label": "地方自治",
+              "query": "中学受験 社会 公民 地方自治"
+            }
+          ]
         },
         {
           "page": 9,
           "image": "pages/shakai_r2/p09.png",
           "kind": "problem",
-          "topic": "中学受験 社会 公民 裁判所 三審制 三権分立"
+          "topics": [
+            {
+              "label": "裁判所と三審制",
+              "query": "中学受験 社会 公民 裁判所 三審制"
+            },
+            {
+              "label": "国会のはたらき",
+              "query": "中学受験 社会 公民 国会のはたらき"
+            }
+          ]
         },
         {
           "page": 10,
           "image": "pages/shakai_r2/p10.png",
           "kind": "problem",
-          "topic": "中学受験 社会 公民 基本的人権 選挙権"
+          "topics": [
+            {
+              "label": "基本的人権（社会権）",
+              "query": "中学受験 社会 公民 基本的人権 社会権"
+            },
+            {
+              "label": "選挙権と成年年齢",
+              "query": "中学受験 社会 公民 選挙権 成年年齢"
+            }
+          ]
         },
         {
           "page": 11,
           "image": "pages/shakai_r2/p11.png",
           "kind": "blank",
-          "topic": "中学受験 社会 解説"
+          "topics": []
         },
         {
           "page": 12,
           "image": "pages/shakai_r2/p12.png",
           "kind": "blank",
-          "topic": "中学受験 社会 解説"
+          "topics": []
         }
       ]
     },
@@ -641,73 +1170,138 @@
           "page": 1,
           "image": "pages/shakai_r3/p01.png",
           "kind": "title",
-          "topic": "中学受験 社会 解説"
+          "topics": []
         },
         {
           "page": 2,
           "image": "pages/shakai_r3/p02.png",
           "kind": "problem",
-          "topic": "中学受験 社会 歴史 時代の並べかえ 元寇"
+          "topics": [
+            {
+              "label": "歴史（通史・時代の並べかえ）",
+              "query": "中学受験 社会 歴史 時代の並べかえ 通史"
+            }
+          ]
         },
         {
           "page": 3,
           "image": "pages/shakai_r3/p03.png",
           "kind": "problem",
-          "topic": "中学受験 社会 歴史 聖武天皇 仏教 安政の五カ国条約"
+          "topics": [
+            {
+              "label": "開国と貿易",
+              "query": "中学受験 社会 安政の五カ国条約 開国 貿易"
+            },
+            {
+              "label": "聖武天皇と奈良時代の仏教",
+              "query": "中学受験 社会 聖武天皇 奈良時代 仏教"
+            }
+          ]
         },
         {
           "page": 4,
           "image": "pages/shakai_r3/p04.png",
           "kind": "problem",
-          "topic": "中学受験 社会 歴史 明治時代 鉄道 文明開化"
+          "topics": [
+            {
+              "label": "文明開化と鉄道",
+              "query": "中学受験 社会 文明開化 鉄道 明治時代"
+            }
+          ]
         },
         {
           "page": 5,
           "image": "pages/shakai_r3/p05.png",
           "kind": "problem",
-          "topic": "中学受験 社会 歴史 大日本帝国憲法 井伊直弼"
+          "topics": [
+            {
+              "label": "開国と井伊直弼",
+              "query": "中学受験 社会 井伊直弼 安政の五カ国条約"
+            },
+            {
+              "label": "大日本帝国憲法",
+              "query": "中学受験 社会 大日本帝国憲法"
+            }
+          ]
         },
         {
           "page": 6,
           "image": "pages/shakai_r3/p06.png",
           "kind": "problem",
-          "topic": "中学受験 社会 地理 都市と地形 川と平野"
+          "topics": [
+            {
+              "label": "都市と地形（川と平野）",
+              "query": "中学受験 社会 川がつくる地形 平野 都市"
+            }
+          ]
         },
         {
           "page": 7,
           "image": "pages/shakai_r3/p07.png",
           "kind": "problem",
-          "topic": "中学受験 社会 地理 工業地帯 雨温図 埋め立て地"
+          "topics": [
+            {
+              "label": "工業地帯・工業地域",
+              "query": "中学受験 社会 工業地帯 工業地域"
+            },
+            {
+              "label": "雨温図と気候",
+              "query": "中学受験 社会 雨温図 気候"
+            }
+          ]
         },
         {
           "page": 8,
           "image": "pages/shakai_r3/p08.png",
           "kind": "problem",
-          "topic": "中学受験 社会 公民 国際社会 NATO 安全保障"
+          "topics": [
+            {
+              "label": "国際社会と安全保障",
+              "query": "中学受験 社会 公民 NATO 安全保障理事会 国際連合"
+            }
+          ]
         },
         {
           "page": 9,
           "image": "pages/shakai_r3/p09.png",
           "kind": "problem",
-          "topic": "中学受験 社会 公民 インフレーション 国際連合"
+          "topics": [
+            {
+              "label": "国際連合",
+              "query": "中学受験 社会 公民 国際連合 安全保障理事会"
+            },
+            {
+              "label": "インフレーション",
+              "query": "中学受験 社会 公民 インフレーション 物価"
+            }
+          ]
         },
         {
           "page": 10,
           "image": "pages/shakai_r3/p10.png",
           "kind": "problem",
-          "topic": "中学受験 社会 公民 税金 直接税 衆議院"
+          "topics": [
+            {
+              "label": "税金（直接税・間接税）",
+              "query": "中学受験 社会 公民 税金 直接税 間接税"
+            },
+            {
+              "label": "衆議院と国会",
+              "query": "中学受験 社会 公民 衆議院 国会"
+            }
+          ]
         },
         {
           "page": 11,
           "image": "pages/shakai_r3/p11.png",
           "kind": "blank",
-          "topic": "中学受験 社会 解説"
+          "topics": []
         },
         {
           "page": 12,
           "image": "pages/shakai_r3/p12.png",
           "kind": "blank",
-          "topic": "中学受験 社会 解説"
+          "topics": []
         }
       ]
     }

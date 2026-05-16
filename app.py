@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 江戸川女子中 入試問題 学習アプリ
-左：問題ページ画像 / 右：トピック関連のYouTube動画
+左：問題ページ画像 / 右：ページ内の単元ごとに関連YouTube動画を縦に並べる
 """
 import json
 import os
@@ -15,6 +15,7 @@ APP_DIR = os.path.dirname(os.path.abspath(__file__))
 INDEX_PATH = os.path.join(APP_DIR, "index.json")
 
 SUBJECT_COLOR = {"算数": "#2e7d32", "理科": "#1565c0", "社会": "#e65100"}
+VIDEOS_PER_TOPIC = 3  # 各単元で表示する動画の本数
 
 st.set_page_config(page_title="江戸女 入試問題 勉強アプリ", page_icon="📚", layout="wide")
 
@@ -53,15 +54,15 @@ def load_index():
         return json.load(f)
 
 
-def save_topic(exam_id, page_no, new_topic):
-    """index.json の該当ページの topic を書き換えて保存する。"""
+def save_page_topics(exam_id, page_no, topics):
+    """index.json の該当ページの topics リストを丸ごと書き換えて保存する。"""
     with open(INDEX_PATH, encoding="utf-8") as f:
         data = json.load(f)
     for exam in data["exams"]:
         if exam["id"] == exam_id:
             for pg in exam["pages"]:
                 if pg["page"] == page_no:
-                    pg["topic"] = new_topic
+                    pg["topics"] = topics
     with open(INDEX_PATH, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     load_index.clear()
@@ -69,7 +70,7 @@ def save_topic(exam_id, page_no, new_topic):
 
 # ---------------------------------------------------------------- YouTube 検索
 @st.cache_data(ttl=3600, show_spinner=False)
-def youtube_search(query, max_results=4):
+def youtube_search(query, max_results=3):
     """APIキー不要。YouTube検索結果ページから動画IDを抽出する。"""
     if not query.strip():
         return []
@@ -105,8 +106,8 @@ GEMINI_MODEL = "gemini-2.5-flash"
 
 
 @st.cache_data(ttl=86400, show_spinner=False)
-def gemini_suggest_query(image_path):
-    """問題ページ画像をGeminiに渡し、YouTube検索キーワードと単元名を返す。"""
+def gemini_suggest_topics(image_path):
+    """問題ページ画像をGeminiに渡し、単元ごとの検索キーワードのリストを返す。"""
     from google import genai
     from google.genai import types
 
@@ -116,12 +117,14 @@ def gemini_suggest_query(image_path):
     prompt = (
         "あなたは中学受験の学習サポートです。"
         "添付画像は中学入試の問題ページです。"
-        "この問題を理解するために小学生が見るとよいYouTube解説動画を"
-        "見つけるための、日本語の検索キーワードを1つ作ってください。"
-        "複数の小問がある場合は主要な単元にしぼってまとめてください。"
-        "塾や教育チャンネルの解説動画が見つかりやすい、具体的なキーワードに"
+        "このページには異なる単元の問題が複数ふくまれていることがあります。"
+        "問題をよく読み、出題されている単元を一つ一つに分けてください。"
+        "それぞれの単元について、小学生がその単元を理解するために見るとよい"
+        "YouTube解説動画を見つけるための日本語の検索キーワードを作ってください。"
+        "塾や教育チャンネルの解説動画が見つかりやすい具体的なキーワードに"
         "してください（例:「中学受験 算数 食塩水 濃度 解説」）。"
-        "topic には単元名を短く、query には検索キーワードを入れてください。"
+        "label には単元名を短く、query には検索キーワードを入れ、"
+        "単元ごとのオブジェクトの配列で答えてください。"
     )
 
     client = genai.Client(api_key=GEMINI_API_KEY)
@@ -134,12 +137,15 @@ def gemini_suggest_query(image_path):
         config=types.GenerateContentConfig(
             response_mime_type="application/json",
             response_schema={
-                "type": "object",
-                "properties": {
-                    "topic": {"type": "string"},
-                    "query": {"type": "string"},
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "label": {"type": "string"},
+                        "query": {"type": "string"},
+                    },
+                    "required": ["label", "query"],
                 },
-                "required": ["topic", "query"],
             },
         ),
     )
@@ -172,8 +178,8 @@ if not pages:
 
 st.sidebar.divider()
 st.sidebar.caption(
-    "右側の動画はキーワード検索で表示しています。\n"
-    "ぴったりの動画が出ないときは、問題の下のキーワード欄を書きかえてね。"
+    "1ページにいくつかの単元があるときは、単元ごとに動画を並べています。\n"
+    "ぴったりの動画が出ないときは、単元の下のキーワード欄を書きかえてね。"
 )
 
 # ---------------------------------------------------------------- ページ位置の管理
@@ -234,72 +240,95 @@ with left:
         st.error(f"画像が見つかりません: {page['image']}")
 
 with right:
-    st.subheader("🎬 関連動画")
-    topic_key = f"topic_{exam['id']}_{page['page']}"
+    st.subheader("🎬 単元ごとの関連動画")
+
+    topics = page.get("topics", [])
     pending_key = f"pending_{exam['id']}_{page['page']}"
-    ai_topic_key = f"aitopic_{exam['id']}_{page['page']}"
 
-    # AIボタンの結果が保留されていれば、ウィジェット生成前にキーワード欄へ反映
+    # AIボタンの結果が保留されていれば、ウィジェット生成前に index.json へ反映
     if pending_key in st.session_state:
-        st.session_state[topic_key] = st.session_state.pop(pending_key)
-    if topic_key not in st.session_state:
-        st.session_state[topic_key] = page["topic"]
+        new_topics = st.session_state.pop(pending_key)
+        save_page_topics(exam["id"], page["page"], new_topics)
+        for i in range(20):  # 古いキーワード欄の状態を掃除
+            st.session_state.pop(f"kw_{exam['id']}_{page['page']}_{i}", None)
+        st.rerun()
 
-    # 🤖 AIにおまかせボタン
+    # 🤖 AIにおまかせボタン（ページ全体の単元を判定しなおす）
     ai_disabled = not GEMINI_API_KEY
-    if st.button(
-        "🤖 AIにこの問題に合う動画をさがしてもらう",
-        width="stretch",
-        disabled=ai_disabled,
-        type="primary",
-    ):
-        try:
-            with st.spinner("🤖 AIが問題を読んでいます…"):
-                result = gemini_suggest_query(img_path)
-            st.session_state[pending_key] = result["query"]
-            st.session_state[ai_topic_key] = result["topic"]
+    cols = st.columns([3, 2])
+    with cols[0]:
+        if st.button(
+            "🤖 AIに単元を見つけてもらう",
+            width="stretch",
+            disabled=ai_disabled,
+            type="primary",
+        ):
+            try:
+                with st.spinner("🤖 AIが問題を読んでいます…"):
+                    result = gemini_suggest_topics(img_path)
+                if result:
+                    st.session_state[pending_key] = result
+                    st.rerun()
+                else:
+                    st.warning("AIが単元を判定できませんでした。")
+            except Exception as e:
+                st.error(f"AIの呼び出しに失敗しました: {e}")
+    with cols[1]:
+        if st.button("🔄 動画をさがしなおす", width="stretch"):
+            youtube_search.clear()
             st.rerun()
-        except Exception as e:
-            st.error(f"AIの呼び出しに失敗しました: {e}")
 
     if ai_disabled:
         st.caption("💡 AI機能を使うには Gemini APIキーの設定が必要です（READMEを参照）。")
-    if st.session_state.get(ai_topic_key):
-        st.caption(f"🤖 AIの判定した単元: 「{st.session_state[ai_topic_key]}」")
 
-    topic = st.text_input(
-        "🔍 動画の検索キーワード（書きかえると保存されます）",
-        key=topic_key,
-    )
-    if topic != page["topic"]:
-        save_topic(exam["id"], page["page"], topic)
-        st.toast("キーワードを保存しました ✅")
+    if not topics:
+        st.info("このページには単元が登録されていません。")
 
-    cols = st.columns([1, 1])
-    with cols[0]:
-        refresh = st.button("🔄 動画をさがしなおす", width="stretch")
-    with cols[1]:
-        search_url = "https://www.youtube.com/results?search_query=" + \
-            urllib.parse.quote(topic)
-        st.link_button("▶ YouTubeで開く", search_url, width="stretch")
-
-    if refresh:
-        youtube_search.clear()
-
-    try:
-        with st.spinner("動画をさがしています…"):
-            video_ids = youtube_search(topic, max_results=4)
-        if video_ids:
-            for vid in video_ids:
-                st.video(f"https://www.youtube.com/watch?v={vid}")
-        else:
-            st.info("動画が見つかりませんでした。キーワードを変えてみてください。")
-    except Exception as e:
-        st.warning(
-            "動画の取得に失敗しました（ネット接続を確認してください）。\n"
-            "上の「YouTubeで開く」から直接さがせます。"
+    # 単元ごとに「見出し → キーワード欄 → 動画」を縦に並べる
+    edited = False
+    for i, topic in enumerate(topics):
+        label = topic.get("label", f"単元{i + 1}")
+        st.markdown(
+            f"<div style='margin-top:18px;padding:6px 10px;border-radius:6px;"
+            f"background:{color};color:#fff;font-weight:bold;font-size:1.05em'>"
+            f"📘 {label}</div>",
+            unsafe_allow_html=True,
         )
-        st.caption(f"詳細: {e}")
+
+        kw_key = f"kw_{exam['id']}_{page['page']}_{i}"
+        if kw_key not in st.session_state:
+            st.session_state[kw_key] = topic.get("query", "")
+
+        query = st.text_input(
+            "🔍 検索キーワード（書きかえると保存されます）",
+            key=kw_key,
+            label_visibility="collapsed",
+        )
+        if query != topic.get("query", ""):
+            topic["query"] = query
+            edited = True
+
+        search_url = "https://www.youtube.com/results?search_query=" + \
+            urllib.parse.quote(query)
+        st.link_button("▶ この単元をYouTubeで開く", search_url, width="stretch")
+
+        try:
+            with st.spinner("動画をさがしています…"):
+                video_ids = youtube_search(query, max_results=VIDEOS_PER_TOPIC)
+            if video_ids:
+                for vid in video_ids:
+                    st.video(f"https://www.youtube.com/watch?v={vid}")
+            else:
+                st.info("動画が見つかりませんでした。キーワードを変えてみてください。")
+        except Exception:
+            st.warning(
+                "動画の取得に失敗しました（ネット接続を確認してください）。\n"
+                "上の「YouTubeで開く」から直接さがせます。"
+            )
+
+    if edited:
+        save_page_topics(exam["id"], page["page"], topics)
+        st.toast("キーワードを保存しました ✅")
 
 st.divider()
 st.caption(
