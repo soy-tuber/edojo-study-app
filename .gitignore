@@ -8,3 +8,6 @@ __pycache__/
 # ログ・一時ファイル
 *.log
 _test_*.py
+
+# ローカル生成物（build_db.py で作る SQLite DB。配布せずローカルで生成）
+*.db

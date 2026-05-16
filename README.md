@@ -63,10 +63,24 @@
 |---|---|
 | `app.py` | アプリ本体（PINロック付き） |
 | `build_pages.py` | PDF をページ画像に変換し `index.json` を生成 |
+| `build_db.py` | `index.json` と問題PDFから SQLite DB（`edojo.db`）を生成 |
 | `index.json` | 問題ページ一覧と単元別の検索キーワード（`topics`） |
 | `pages/` | ページ画像 |
 | `requirements.txt` | 依存パッケージ |
 | `run.bat` | ローカル起動用 |
+
+## ローカルで SQLite データベースを作る
+
+`index.json` のメタデータと、問題PDFから抽出した問題文を 1 つの SQLite DB に
+まとめたいときは次を実行します（`edojo.db` がカレントに生成されます）:
+
+```
+"%LOCALAPPDATA%\Programs\Python\Python312\python.exe" build_db.py
+```
+
+- 入試PDFはテキスト埋め込み済みのため、AI/OCR を使わず PyMuPDF で問題文を抽出します（図・数式画像は対象外）。
+- テーブル: `exams`（試験）/ `pages`（ページ・問題文）/ `topics`（単元・検索キーワード）。
+- `edojo.db` はローカル生成物のため `.gitignore` 済み（配布しません）。
 
 ## 問題PDFを入れ替え・追加するとき
 
