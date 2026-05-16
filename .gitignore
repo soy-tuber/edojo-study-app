@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.pyc
+
+# Streamlit secrets（PINなどの秘密情報。コミットしない）
+.streamlit/secrets.toml
+
+# ログ・一時ファイル
+*.log
+_test_*.py
